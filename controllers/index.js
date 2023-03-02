@@ -5,12 +5,12 @@ const userRoutes = require('./userController');
 router.use("/api/users",userRoutes);
 
 const weblogRoutes = require('./weblogController');
-router.use("/api/blogPosts",blogPostrRoutes);
+router.use("/api/weblogs",weblogRoutes);
 
-const userRoutes = require('./commentController');
+const commentRoutes = require('./commentController');
 router.use("/api/comments",commentRoutes);
 
-const userRoutes = require('./frontEndController');
+const frontEndRoutes = require('./frontEndController');
 router.use("/",frontEndRoutes);
 
 module.exports = router;
