@@ -4,7 +4,7 @@ const router = express.Router();
 const userRoutes = require('./userController');
 router.use("/api/users",userRoutes);
 
-const blogPostRoutes = require('./blogPostController');
+const weblogRoutes = require('./weblogController');
 router.use("/api/blogPosts",blogPostrRoutes);
 
 const userRoutes = require('./commentController');

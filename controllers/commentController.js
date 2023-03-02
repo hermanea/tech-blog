@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const {User,Comment,BlogPost} = require('../models');
+const {User,Comment,Weblog} = require('../models');
 
 router.get("/", (req,res)=>{
     Comment.findAll({
-       include:[User,BlogPost]
+       include:[User,Weblog]
     })
-    .then(postData=>{
-       res.json(blogPostData)
+    .then(weblogData=>{
+       res.json(weblogData)
     })
     .catch(err=>{
        console.log(err);
@@ -17,7 +17,7 @@ router.get("/", (req,res)=>{
    
 router.get("/:id", (req,res)=>{
     Comment.findByPk(req.params.id,{
-        include:[User,BlogPost]
+        include:[User,Weblog]
     })
     .then(commentData=>{
         res.json(commentData)
@@ -47,9 +47,9 @@ router.get("/:id", (req,res)=>{
 router.post("/", (req,res)=>{
     if(req.session.userId){
         Comment.create({
-            BlogPostId:req.body.BlogPostId,
+            WeblogId:req.body.WeblogId,
             comment:req.body.comment,
-            UserId:req.session.userId
+            UserId:req.session.UserId
     })
     .then(commentData=>{
         res.json(commentData)

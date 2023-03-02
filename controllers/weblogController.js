@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router()
-const {User,Comment,BlogPost} = require('../models')
+const {User,Comment,Weblog} = require('../models')
 
 router.get("/", (req,res)=>{
-    BlogPost.findAll({
+    Weblog.findAll({
         include:[User,Comment]
     })
-    .then(blogPostData=>{
-        res.json(blogPostData)
+    .then(weblogData=>{
+        res.json(weblogData)
     })
     .catch(err=>{
         console.log(err);
@@ -16,11 +16,11 @@ router.get("/", (req,res)=>{
 })
 
 router.get("/:id", (req,res)=>{
-    BlogPost.findByPk(req.params.id,{
+    Weblog.findByPk(req.params.id,{
         include:[User, Comment]
     })
-    .then(blogPostData=>{
-       res.json(blogPostData)
+    .then(weblogData=>{
+       res.json(weblogData)
     })
     .catch(err=>{
        console.log(err);
@@ -30,13 +30,13 @@ router.get("/:id", (req,res)=>{
 
 router.post("/", (req,res)=>{
    if(req.session.userId){
-      BlogPost.create({
+      Weblog.create({
          title:req.body.title,
-         blogPost:req.body.post,
+         weblog:req.body.post,
          UserId:req.session.userId
      })
-     .then(blogPostData=>{
-        res.json(blogPostData)
+     .then(weblogData=>{
+        res.json(weblogData)
      })
      .catch(err=>{
         console.log(err);
@@ -48,15 +48,15 @@ router.post("/", (req,res)=>{
 })
 
 router.put("/:id",(req,res)=>{
-    BlogPost.update({
+    Weblog.update({
         post:req.body.post
     },{
         where:{
             id:req.params.id
         }
     })
-    .then(blogPostdata=>{
-        if(blogPostdata[0]){
+    .then(weblogdata=>{
+        if(weblogdata[0]){
             return res.json(data)
         } else {
             return res.status(404).json({msg:"No Such Record."})
@@ -73,14 +73,14 @@ router.put("/:id",(req,res)=>{
 
 router.delete("/:id", (req,res)=>{
    if(req.session.userId){
-      BlogPost.findByPk(req.params.id,{
+      Weblog.findByPk(req.params.id,{
          include:[User]
      })
-     .then(blogPostData=>{
-        if(!blogPostData){
+     .then(weblogData=>{
+        if(!weblogData){
          res.status(404).json({msg:"No such post!"})
         } else if(postData.UserId===req.session.userId){
-         BlogPost.destroy({where: {
+         Weblog.destroy({where: {
             id:req.params.id
          }})
          res.send("Post deleted!")

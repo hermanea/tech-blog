@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {User,Comment,BlogPost} = require('../models')
+const {User,Comment,Weblog} = require('../models')
 
 router.get("/", (req,res)=>{
     if(req.session.userId){
@@ -24,14 +24,12 @@ router.get("/signup",(req,res)=>{
 
 router.get("/homepage",(req,res)=>{
     if(req.session.userId){
-        BlogPost.findAll({
+        Weblog.findAll({
             include:[User, Comment]
         })
         .then(userData => {
             const hbsUser = userData.map(post=>post.toJSON())
             const session = JSON.stringify(req.session)
-            // console.log(hbsUser);
-            // console.log(session);
             res.render("homepage", {
                 posts:hbsUser, session
             })
