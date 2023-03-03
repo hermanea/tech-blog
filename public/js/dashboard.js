@@ -1,3 +1,8 @@
+const newWeblogForm = document.querySelector('.newWeblogForm');
+document.querySelector('#newWeblog').addEventListener('click', () => {
+    newWeblogForm.classList.remove('hidden');
+});
+
 document.querySelector("#weblogForm").addEventListener("submit",event=>{
     event.preventDefault();
     const loginObj = {
