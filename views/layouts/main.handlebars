@@ -10,10 +10,15 @@
 <body>
     <header>
         <nav>
-            <a href="/">Home</a>
-            <a href="/Dashboard">Dashboard</a>
-            <a href="/Login">Login</a>
-            <a href="/Logout">Logout</a>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/Dashboard">Dashboard</a></li>
+                {{#if session.userID}}
+                    <li><a href="/Logout">Logout</a></li>
+                {{else}}
+                    <li><a href="/Login">Login</a></li>
+                {{/if}}
+            </ul>
         </nav>
         <h1>The Tech Blog</h1>
     </header>
