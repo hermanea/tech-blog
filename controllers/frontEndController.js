@@ -22,6 +22,28 @@ router.get("/signup",(req,res)=>{
     res.render("signup")
 })
 
+router.get("/dashboard", (req,res)=>{
+    if(req.session.userId){
+        User.findByPk(req.session.userId,{
+            include:[{
+                model:Weblog,
+                include:{
+                    model:Comment
+                }
+            }, Comment]
+        })
+        .then(userData => {
+            const hbsUser = userData.toJSON()
+            console.log(hbsUser);
+            res.render("dashboard", {
+                user:hbsUser
+            })
+        })
+    } else {
+        res.redirect('/login');
+    }
+})
+
 router.get("/homepage",(req,res)=>{
     if(req.session.userId){
         Weblog.findAll({
@@ -38,5 +60,7 @@ router.get("/homepage",(req,res)=>{
         res.redirect('/login');
     }
 })
+
+
 
 module.exports = router;

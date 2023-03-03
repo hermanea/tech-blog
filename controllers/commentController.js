@@ -58,54 +58,58 @@ router.post("/", (req,res)=>{
         res.status(500).json({msg:"Error.",err})
     })
     } else {
-        res.status(403).json({msg:"login to add a comment!"})
+        res.status(403).json({msg:"Please login to comment."})
     }
 })
    
-// router.delete("/:id", (req,res)=>{
-//     if(req.session.userId){
-//         Comment.findByPk(req.params.id,{
-//         include:[User]
-//     }).then(commentData=>{
-//         if(!commentData){
-//         res.status(404).json({msg:"No such comment!"})
-//         } else if(commentData.UserId===req.session.userId){
-//         Comment.destroy({where: {
-//             id:req.params.id
-//         }})
-//         res.send("Comment deleted!")
-//         } else {
-//         res.status(403).json({msg:"You can not delete another users comment!"})
-//         }
-//     }).catch(err=>{
-//         console.log(err);
-//         res.status(500).json({msg:"An error occured",err})
-//     })
-//     } else {
-//         res.status(403).json({msg:"login to delete a comment!"})
-//     }
-// })
+router.delete("/:id", (req,res)=>{
+    if(req.session.userId){
+        Comment.findByPk(req.params.id,{
+        include:[User]
+    })
+    .then(commentData=>{
+        if(!commentData){
+        res.status(404).json({msg:"No such comment!"})
+        } else if(commentData.UserId===req.session.userId){
+        Comment.destroy({where: {
+            id:req.params.id
+        }})
+        res.send("Comment deleted.")
+        } else {
+        res.status(403).json({msg:"You can not delete another users comment!"})
+        }
+    })
+    .catch(err=>{
+        console.log(err);
+        res.status(500).json({msg:"Error.",err})
+    })
+    } else {
+        res.status(403).json({msg:"Please login to delete a comment!"})
+    }
+})
    
-// router.put("/:id",(req,res)=>{
-//     Comment.update({
-//         comment:req.body.comment
-//     },{
-//         where:{
-//             id:req.params.id
-//         }
-//     }).then(data=>{
-//         if(data[0]){
-//             return res.json(data)
-//         } else {
-//             return res.status(404).json({msg:"no such record"})
-//         }
-//     }).catch(err=>{
-//         console.log(err);
-//         res.status(500).json({
-//             msg:"Error",
-//             err:err
-//         })
-//     })
-// })
+router.put("/:id",(req,res)=>{
+    Comment.update({
+        comment:req.body.comment
+    },{
+        where:{
+            id:req.params.id
+        }
+    })
+    .then(data=>{
+        if(data[0]){
+            return res.json(data)
+        } else {
+            return res.status(404).json({msg:"Error."})
+        }
+    })
+    .catch(err=>{
+        console.log(err);
+        res.status(500).json({
+            msg:"Error",
+            err:err
+        })
+    })
+})
    
 module.exports = router;
