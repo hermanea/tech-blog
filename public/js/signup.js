@@ -1,4 +1,4 @@
-document.querySelector('#signupForm').addEventListener("click" , event =>{
+document.querySelector('#signupBtn').addEventListener("submit" , event =>{
     event.preventDefault();
     const signUpObj = {
         username:document.querySelector('#signupUsername').value,

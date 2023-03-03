@@ -1,4 +1,4 @@
-document.querySelector("#weblogForm").addEventListener("click",event=>{
+document.querySelector("#weblogForm").addEventListener("submit",event=>{
     event.preventDefault();
     const loginObj = {
         title:document.querySelector("#weblogTitle").value,

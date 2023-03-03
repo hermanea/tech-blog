@@ -1,4 +1,4 @@
-document.querySelector('#loginForm').addEventListener("click" , event =>{
+document.querySelector('#loginBtn').addEventListener("submit" , event =>{
     event.preventDefault();
     const loginObj = {
         username:document.querySelector('#loginUsername').value,

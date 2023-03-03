@@ -1,0 +1,18 @@
+<div class="">
+    <div class="">
+        <div class="">
+            {{#each allWeblogs}}
+            <div class="card border">
+                <div class="card-header border">
+                    <div class=""><h5 class="card-title"><a href="post/{{id}}">{{title}}</a></h5></div>
+                    <div class="">Posted by: {{User.Username}} on {{User.createdAt}}</div>
+                </div>
+                <div class="card-body text">
+                    <p class="card-text">{{text}}</p>
+                </div>
+            </div>
+            <br>
+            {{/each}}
+        </div>
+    </div>
+</div>
