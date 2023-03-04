@@ -33,8 +33,7 @@ router.post("/", (req,res)=>{
       Weblog.create({
          title:req.body.title,
          post:req.body.text,
-         User:req.session.userId,
-         Username:req.body.username
+         UserId:req.session.userId
      })
      .then(weblogData=>{
         res.json(weblogData)

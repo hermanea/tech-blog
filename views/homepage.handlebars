@@ -1,12 +1,12 @@
 {{!-- <div class=""> --}}
     {{!-- <div class=""> --}}
         {{!-- <div class=""> --}}
-            {{#each allWeblogs}}
+            {{#each Weblog}}
                 <div class="card border weblog">
                     <div class="card-header border">
                         <div class=""><h5 class="card-title"><a href="post/{{id}}">{{title}}</a></h5></div>
-                        <div class="">Posted by: {{User.Username}} on {{User.createdAt}}</div>
-                        <div><p class="card-text">{{text}}</p></div>
+                        <div class="">Posted by: {{Username}} on {{createdAt}}</div>
+                        <div><p class="card-text">{{post}}</p></div>
                     </div>
                     <form class="commentForm" style="display:none;">
                         <label for="exampleFormControlTextarea1" class="form-label">Add a Comment</label>
@@ -18,7 +18,7 @@
                             <div class="alert alert-warning">
                                 {{text}} 
                                 <hr>
-                                posted by: {{User.email}} @ {{createdAt}}
+                                posted by: {{User.username}} @ {{createdAt}}
                             </div>
                         {{/each}}
                     </div>
