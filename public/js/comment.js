@@ -22,3 +22,15 @@ document.querySelector("#weblogComment").addEventListener("click",event=>{
         }
     })
 })
+
+constweblogTitles = document.querySelectorAll('.weblog h5')
+
+weblogTitles.forEach(title => {
+    title.addEventListener('click', () => {
+        const commentForm = title.nextElementSibling.nextElementSibling;
+        commentForm.style.display = commentForm.style.display === 'none' ? 'block' : 'none';
+
+        const weblogComments = title.nextElementSibling.nextElementSibling.nextElementSibling;
+        weblogComments.style.display = comments.style.display === 'none' ? 'block' : 'none';
+    });
+});

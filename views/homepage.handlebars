@@ -2,17 +2,32 @@
     <div class="">
         <div class="">
             {{#each allWeblogs}}
-            <div class="card border">
-                <div class="card-header border">
-                    <div class=""><h5 class="card-title"><a href="post/{{id}}">{{title}}</a></h5></div>
-                    <div class="">Posted by: {{User.Username}} on {{User.createdAt}}</div>
+                <div class="card border weblog">
+                    <div class="card-header border">
+                        <div class=""><h5 class="card-title"><a href="post/{{id}}">{{title}}</a></h5></div>
+                        <div class="">Posted by: {{User.Username}} on {{User.createdAt}}</div>
+                        <div><p class="card-text">{{text}}</p></div>
+                    </div>
+                    <form class="commentForm" style="display:none;">
+                        <label for="exampleFormControlTextarea1" class="form-label">Add a Comment</label>
+                        <textarea class="form-control" id="addComment" rows="3"></textarea>
+                        <button type="submit">Submit</button>
+                    </form>
+                    <div class="weblogComments" stlye="display:none;">
+                        {{#each weblog.Comments}}
+                            <div class="alert alert-warning">
+                                {{text}} 
+                                <hr>
+                                posted by: {{User.email}} @ {{createdAt}}
+                            </div>
+                        {{/each}}
+                    </div>
+                    <hr>
                 </div>
-                <div class="card-body text">
-                    <p class="card-text">{{text}}</p>
-                </div>
-            </div>
-            <br>
             {{/each}}
         </div>
     </div>
 </div>
+
+    
+
