@@ -20,7 +20,7 @@ router.get("/logout", (req,res)=>{
    
 router.get("/:id", (req,res)=>{
     User.findByPk(req.params.id,{
-        include:[WeblogPost]
+        include:[Weblog]
     })
     .then(userData=>{
         res.json(userData)

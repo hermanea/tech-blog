@@ -11,7 +11,7 @@
                     <p class="card-text">{{text}}</p>
                 </div>
             </div>
-            <br>
+            <hr>
             {{/each}}
         </div>
     </div>
@@ -21,7 +21,7 @@
 <div class="">
   <div class="">
     <div class="">
-      <form class="newWeblogForm hidden">
+      <form id="newWeblogForm" style="display: none;">
         <div class="form-group">
           <label for="exampleInputEmail1" class="form-label">Title</label>
           <input class="form-control" id="weblogTitle">
@@ -32,9 +32,9 @@
         </div>
         <button type="submit" class="btn btn-primary" id="newWeblogBtn"></button>
       </form>
-      <button type="submit" class="btn btn-primary" id="newWeblog">+ New Post</button>
+      <button type="submit" class="btn btn-primary" id="newWeblogBtn">+ New Post</button>
     </div>
   </div>
 </div>
 
-<script src="/public/js/dashboard.js"></script>
+<script src="/js/dashboard.js"></script>

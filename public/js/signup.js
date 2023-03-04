@@ -1,10 +1,11 @@
-document.querySelector('#signupBtn').addEventListener("submit" , event =>{
+document.querySelector('#signupForm').addEventListener("submit" , event =>{
     event.preventDefault();
     const signUpObj = {
         username:document.querySelector('#signupUsername').value,
         password:document.querySelector('#signupPassword').value
     }
-    fetch("api/users", {
+    console.log(signUpObj);
+    fetch("/api/users", {
         method:"POST",
         body:JSON.stringify(signUpObj),
         headers:{
