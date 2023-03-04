@@ -1,15 +1,17 @@
-const newWeblogBtn = document.querySelector('#newWeblog');
-const newWeblogForm = document.querySelector('newWeblogForm');
+const showFormBtn = document.querySelector('#showFormBtn');
+const newWeblogForm = document.querySelector('#newWeblogForm');
+const newWeblogBtn = document.querySelector('#newWeblogBtn');
 
-newWeblogBtn.addEventListener('submit', () => {
-    if (newWeblogForm.getElementsByClassName.display === 'none') {
+showFormBtn.addEventListener('click', (event) => {
+    event.preventDefault();
+    if (newWeblogForm.style.display === 'none') {
         newWeblogForm.style.display = 'block';
     } else {
         newWeblogForm.style.display = 'none';
     }
 });
 
-document.querySelector("#newWeblogForm").addEventListener("submit", event=>{
+document.querySelector("#newWeblogForm").addEventListener("submit", (event) => {
     event.preventDefault();
     const loginObj = {
         title:document.querySelector("#weblogTitle").value,

@@ -32,8 +32,9 @@ router.post("/", (req,res)=>{
    if(req.session.userId){
       Weblog.create({
          title:req.body.title,
-         weblog:req.body.post,
-         UserId:req.session.userId
+         post:req.body.text,
+         User:req.session.userId,
+         Username:req.body.username
      })
      .then(weblogData=>{
         res.json(weblogData)
@@ -48,9 +49,7 @@ router.post("/", (req,res)=>{
 })
 
 router.put("/:id",(req,res)=>{
-    Weblog.update({
-        post:req.body.post
-    },{
+    Weblog.update(req.body, {
         where:{
             id:req.params.id
         }
@@ -79,7 +78,7 @@ router.delete("/:id", (req,res)=>{
      .then(weblogData=>{
         if(!weblogData){
          res.status(404).json({msg:"No such post!"})
-        } else if(postData.UserId===req.session.userId){
+        } else if(weblogData.UserId===req.session.userId){
          Weblog.destroy({where: {
             id:req.params.id
          }})
@@ -90,7 +89,7 @@ router.delete("/:id", (req,res)=>{
      })
      .catch(err=>{
         console.log(err);
-        res.status(500).json({msg:"An error occured",err})
+        res.status(500).json({msg:"An error occured.",err})
      })
    } else {
       res.status(403).json({msg:"Login to delete a post!"})
