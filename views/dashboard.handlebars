@@ -4,14 +4,27 @@
             {{#each user.Weblogs}}
               <div class="card border">
                   <div class="card-header border">
-                      <div class=""><h5 class="card-title"><a href="/{{id}}">{{title}}</a></h5></div>
-                      <div class="">Posted by: {{User}} on {{createdAt}}</div>
+                      <div class=""><h5 class="card-title"><a href="#" id="postTitle">{{title}}</a></h5></div>
+                      <div class="">Posted by: {{User.username}} on {{createdAt}}</div>
                   </div>
                   <div class="card-body text">
                       <p class="card-text">{{post}}</p>
                   </div>
               </div>
               <hr>
+
+              <form id="updateWeblogForm" style="display: none;">
+                <div class="form-group">
+                  <label for="updateTitle" class="form-label" id="weblogTitle">Title</label>
+                  <input class="form-control" id="updateTitle" value="{{title}}">
+                </div>
+                <div class="form-group">
+                  <label for="updateText" class="form-label">Content</label>
+                  <textarea class="form-control" id="updateText">{{post}}</textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" id="updateWeblogBtn">Update</button>
+                <button type="submit" class="btn btn-primary" id="removeWeblogBtn">Delete</button>
+              </form>
             {{/each}}
         {{!-- </div> --}}
     {{!-- </div> --}}
@@ -37,18 +50,18 @@
   {{!-- </div> --}}
 {{!-- </div> --}}
 
-<form id="updateWeblogForm" style="display: none;">
+{{!-- <form id="updateWeblogForm" style="display: none;">
   <div class="form-group">
-    <label for="exampleFormControlInput1" class="form-label">Title</label>
-    <input class="form-control" id="updateTitle">
+    <label for="updateTitle" class="form-label" id="weblogTitle"></label>
+    <input class="form-control" id="updateTitle" value="{{title}}">
   </div>
   <div class="form-group">
-    <label for="exampleFormControlTextArea" class="form-label">Content</label>
+    <label for="updateText" class="form-label">Content</label>
     <textarea class="form-control" id="updateText">{{post}}</textarea>
   </div>
   <button type="submit" class="btn btn-primary" id="updateWeblogBtn">Update</button>
-  <button type="submit" class="btn btn-primary" id="deleteWeblogBtn">Delete</button>
-</form>
+  <button type="submit" class="btn btn-primary" id="removeWeblogBtn">Delete</button>
+</form> --}}
 
 <script src="/js/dashboard.js"></script>
 <script src="/js/update.js"></script>

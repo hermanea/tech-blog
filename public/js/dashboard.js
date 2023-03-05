@@ -20,7 +20,7 @@ document.querySelector("#newWeblogForm").addEventListener("submit", (event) => {
         text:document.querySelector("#weblogText").value
     }
     console.log(loginObj);
-    fetch("/api/weblog",{
+    fetch("/api/weblogs",{
         method:"POST",
         body:JSON.stringify(loginObj),
         headers:{
