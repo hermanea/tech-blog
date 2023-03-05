@@ -4,8 +4,8 @@
             {{#each user.Weblogs}}
               <div class="card border">
                   <div class="card-header border">
-                      <div class=""><h5 class="card-title"><a href="post/{{id}}">{{title}}</a></h5></div>
-                      <div class="">Posted by: {{username}} on {{createdAt}}</div>
+                      <div class=""><h5 class="card-title"><a href="/{{id}}">{{title}}</a></h5></div>
+                      <div class="">Posted by: {{User}} on {{createdAt}}</div>
                   </div>
                   <div class="card-body text">
                       <p class="card-text">{{post}}</p>
@@ -37,4 +37,18 @@
   {{!-- </div> --}}
 {{!-- </div> --}}
 
+<form id="updateWeblogForm" style="display: none;">
+  <div class="form-group">
+    <label for="exampleFormControlInput1" class="form-label">Title</label>
+    <input class="form-control" id="updateTitle">
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlTextArea" class="form-label">Content</label>
+    <textarea class="form-control" id="updateText">{{post}}</textarea>
+  </div>
+  <button type="submit" class="btn btn-primary" id="updateWeblogBtn">Update</button>
+  <button type="submit" class="btn btn-primary" id="deleteWeblogBtn">Delete</button>
+</form>
+
 <script src="/js/dashboard.js"></script>
+<script src="/js/update.js"></script>

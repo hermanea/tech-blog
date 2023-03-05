@@ -1,11 +1,11 @@
 {{!-- <div class=""> --}}
     {{!-- <div class=""> --}}
         {{!-- <div class=""> --}}
-            {{#each Weblog}}
+            {{#each Weblogs}}
                 <div class="card border weblog">
                     <div class="card-header border">
-                        <div class=""><h5 class="card-title"><a href="post/{{id}}">{{title}}</a></h5></div>
-                        <div class="">Posted by: {{Username}} on {{createdAt}}</div>
+                        <div class=""><h5 class="card-title"><a href="/{{id}}">{{title}}</a></h5></div>
+                        <div class="">Posted by: {{User}} on {{createdAt}}</div>
                         <div><p class="card-text">{{post}}</p></div>
                     </div>
                     <form class="commentForm" style="display:none;">
@@ -29,5 +29,5 @@
     {{!-- </div> --}}
 {{!-- </div> --}}
 
-    
+<script src="/js/comment.js"></script>
 

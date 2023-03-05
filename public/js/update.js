@@ -1,5 +1,8 @@
-const updateId = window.location.href.split('/').pop();
+// const updateId = window.location.href.split('/').pop();
 
+const titleElement = document.querySelector()
+
+// Event listened that edits the user's post on button click.
 document.querySelector("#updateForm").addEventListener("click",event=>{
     event.preventDefault();
     const loginObj = {
@@ -23,9 +26,10 @@ document.querySelector("#updateForm").addEventListener("click",event=>{
     })
 })
 
+// Event listener that delete's the user's post on button click.
 document.querySelector("#removeForm").addEventListener("click",event=>{
     event.preventDefault();
-    fetch(`/api/blog/${updateId}`,{
+    fetch(`/api/weblog/${updateId}`,{
         method:"DELETE",
         headers:{
             "Content-Type":"application/json"

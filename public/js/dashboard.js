@@ -2,6 +2,7 @@ const showFormBtn = document.querySelector('#showFormBtn');
 const newWeblogForm = document.querySelector('#newWeblogForm');
 const newWeblogBtn = document.querySelector('#newWeblogBtn');
 
+// Display new weblog form on button click.
 showFormBtn.addEventListener('click', (event) => {
     event.preventDefault();
     if (newWeblogForm.style.display === 'none') {
@@ -11,6 +12,7 @@ showFormBtn.addEventListener('click', (event) => {
     }
 });
 
+// Event listener to post new weblog on button click.
 document.querySelector("#newWeblogForm").addEventListener("submit", (event) => {
     event.preventDefault();
     const loginObj = {

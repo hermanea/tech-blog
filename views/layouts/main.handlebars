@@ -14,7 +14,7 @@
             <ul>
                 <li><a href="/">Home</a></li>
                 <li><a href="/Dashboard">Dashboard</a></li>
-                {{#if session.userID}}
+                {{#if session.userId}}
                     <li><a href="/Logout">Logout</a></li>
                 {{else}}
                     <li><a href="/Login">Login</a></li>
