@@ -55,7 +55,7 @@ router.put("/:id",(req,res)=>{
     })
     .then(weblogdata=>{
         if(weblogdata[0]){
-            return res.json(data)
+            return res.json(weblogdata)
         } else {
             return res.status(404).json({msg:"No Such Record."})
         }
@@ -81,17 +81,15 @@ router.delete("/:id", (req,res)=>{
          Weblog.destroy({where: {
             id:req.params.id
          }})
-         res.send("Post deleted!")
-        } else {
-         res.status(403).json({msg:"You can not delete another users post!"})
+         .then(() => {
+            return res.send("Post deleted!")
+         })
         }
      })
      .catch(err=>{
         console.log(err);
         res.status(500).json({msg:"An error occured.",err})
      })
-   } else {
-      res.status(403).json({msg:"Login to delete a post!"})
    }
 })
 

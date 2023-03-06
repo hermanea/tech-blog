@@ -8,39 +8,6 @@ postTitles.forEach((postTitle, index) => {
     });
   });
 
-
-
-// const titleElement = document.querySelector('#postTitle');
-// const updateWeblogForm = document.querySelector('#updateWeblogForm');
-// const updateTitleInput = document.querySelector('#updateTitle');
-// const updateTextInput = document.querySelector('#updateText');
-
-// const updateWeblogBtn = document.querySelector('#updateWeblogBtn');
-// const removeWeblogBtn = document.querySelector('#removeWeblogBtn');
-
-
-// updateTitleInput.value = '{{title}}';
-// updateTextInput.value = '{{post}}';
-
-// Event listener that displays the update form on button click.
-// titleElement.addEventListener("click", (event) => {
-//     event.preventDefault();
-
-//     const postTitle = event.target.textContent;
-//     const postData = User.Weblogs.find(post => post.title === postTitle);
-
-//     updateTitleInput.value = postData.title;
-//     updateTextInput.value = postData.post;
-
-//     if (updateWeblogForm.style.display === 'none') {
-//         updateWeblogForm.style.display = 'block';
-//     } else {
-//         updateWeblogForm.style.display = 'none';
-//     }
-// });
-
-console.log(weblogId)
-
 // Event listener that edits the user's post on button click.
 document.querySelector("#updateWeblogForm").addEventListener("submit", (event) => {
     event.preventDefault();
