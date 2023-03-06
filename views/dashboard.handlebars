@@ -22,8 +22,8 @@
                   <label for="updateText" class="form-label">Content</label>
                   <textarea class="form-control" id="updateText">{{post}}</textarea>
                 </div>
-                <button type="submit" class="btn btn-primary" id="updateWeblogBtn">Update</button>
-                <button type="submit" class="btn btn-primary" id="removeWeblogBtn">Delete</button>
+                <button type="submit" class="updateWeblogBtn" data-id="{{id}}">Update</button>
+                <button type="submit" class="removeWeblogBtn" data-id="{{id}}">Delete</button>
               </form>
             {{/each}}
         {{!-- </div> --}}

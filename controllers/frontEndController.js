@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {User,Weblog,Comment} = require('../models')
+const {User,Weblog,Comment} = require('../models');
 
 router.get("/", (req,res)=>{
     if(req.session.userId){

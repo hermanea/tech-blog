@@ -1,6 +1,6 @@
 const express = require('express');
-const router = express.Router()
-const {User,Weblog,Comment} = require('../models')
+const router = express.Router();
+const {User,Weblog,Comment} = require('../models');
 
 router.get("/", (req,res)=>{
     Weblog.findAll({
@@ -29,7 +29,7 @@ router.get("/:id", (req,res)=>{
 })
 
 router.post("/", (req,res)=>{
-   if(req.session.userId){
+   if(!req.session.userId){
       Weblog.create({
          title:req.body.title,
          post:req.body.text,
@@ -53,9 +53,9 @@ router.put("/:id",(req,res)=>{
             id:req.params.id
         }
     })
-    .then(weblogdata=>{
-        if(weblogdata[0]){
-            return res.json(weblogdata)
+    .then(weblogData=>{
+        if(weblogData[0]){
+            return res.json(weblogData)
         } else {
             return res.status(404).json({msg:"No Such Record."})
         }
@@ -70,7 +70,7 @@ router.put("/:id",(req,res)=>{
  })
 
 router.delete("/:id", (req,res)=>{
-   if(req.session.userId){
+   if(!req.session.userId){
       Weblog.findByPk(req.params.id,{
          include:[User]
      })
