@@ -38,6 +38,7 @@ router.post("/", (req,res)=>{
     })
     .then(userData=>{
         req.session.userId = userData.id;
+        req.session.username = userData.username;
         res.json(userData)
     })
     .catch(err=>{
@@ -58,6 +59,7 @@ router.post("/login", (req,res)=>{
         } else {
             if(bcrypt.compareSync(req.body.password,userData.password)){
                 req.session.userId = userData.id;
+                req.session.username = userData.username;
                 return res.json(userData)
             } else {
                 res.status(401).json({msg:"Incorrect user information."})

@@ -1,4 +1,4 @@
-fetch("/api/user/logout",{
+fetch("/api/users/logout",{
     method:"GET",
 }).then(res=>{
     if(res.ok){

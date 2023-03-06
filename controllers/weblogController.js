@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router()
-const {User,Comment,Weblog} = require('../models')
+const {User,Weblog,Comment} = require('../models')
 
 router.get("/", (req,res)=>{
     Weblog.findAll({

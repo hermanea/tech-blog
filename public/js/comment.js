@@ -1,4 +1,4 @@
-const weblogId = window.location.href.split('/').pop();
+// const weblogId = window.location.href.split('/').pop();
 
 document.querySelector("#weblogComment").addEventListener("click",event=>{
     event.preventDefault();
@@ -7,7 +7,7 @@ document.querySelector("#weblogComment").addEventListener("click",event=>{
         WeblogId: weblogId
     }
     console.log(loginObj);
-    fetch("/api/comment",{
+    fetch("/api/comments",{
         method:"POST",
         body:JSON.stringify(loginObj),
         headers:{
