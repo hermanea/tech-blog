@@ -51,5 +51,25 @@ router.get("/homepage",(req,res)=>{
     })
 })
 
+router.get('/post/:id', (req,res) => {
+    Blog.findByPk(req.params.id,{
+        include:[{
+            model:Comment,
+            include:{
+                model:User
+            }
+        }]
+    }).then(weblogData=>{
+        console.log(weblogData.toJSON());
+        res.render("post",{
+            weblog: weblogData.toJSON(),
+            session:req.session
+        })
+    }).catch(err=>{
+        console.log(err);
+        res.status(500).json({msg:"Error.",err})
+    })
+});
+
 
 module.exports = router;
