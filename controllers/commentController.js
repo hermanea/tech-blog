@@ -28,27 +28,11 @@ router.get("/:id", (req,res)=>{
     })
 })
    
-// router.get("/bypost/:id", (req,res)=>{
-//     Post.findByPk(req.params.id,{
-//         include:[{
-//         model:Comment,
-//         include:{
-//             model:User
-//         }
-//     }]
-//     }).then(commentData=>{
-//         res.json(commentData)
-//     }).catch(err=>{
-//         console.log(err);
-//         res.status(500).json({msg:"An error occured",err})
-//     })
-// })
-   
 router.post("/", (req,res)=>{
     if(req.session.userId){
         Comment.create({
             WeblogId:req.body.WeblogId,
-            comment:req.body.comment,
+            text:req.body.text,
             UserId:req.session.UserId
     })
     .then(commentData=>{
@@ -73,7 +57,8 @@ router.delete("/:id", (req,res)=>{
         } else if(commentData.UserId===req.session.userId){
         Comment.destroy({where: {
             id:req.params.id
-        }})
+            }
+        })
         res.send("Comment deleted.")
         } else {
         res.status(403).json({msg:"You can not delete another users comment!"})
@@ -87,29 +72,3 @@ router.delete("/:id", (req,res)=>{
         res.status(403).json({msg:"Please login to delete a comment!"})
     }
 })
-   
-router.put("/:id",(req,res)=>{
-    Comment.update({
-        comment:req.body.comment
-    },{
-        where:{
-            id:req.params.id
-        }
-    })
-    .then(data=>{
-        if(data[0]){
-            return res.json(data)
-        } else {
-            return res.status(404).json({msg:"Error."})
-        }
-    })
-    .catch(err=>{
-        console.log(err);
-        res.status(500).json({
-            msg:"Error",
-            err:err
-        })
-    })
-})
-   
-module.exports = router;

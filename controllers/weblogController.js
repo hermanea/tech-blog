@@ -29,10 +29,10 @@ router.get("/:id", (req,res)=>{
 })
 
 router.post("/", (req,res)=>{
-   if(!req.session.userId){
+   if(req.session.userId){
       Weblog.create({
          title:req.body.title,
-         post:req.body.text,
+         text:req.body.text,
          UserId:req.session.userId
      })
      .then(weblogData=>{
@@ -54,11 +54,7 @@ router.put("/:id",(req,res)=>{
         }
     })
     .then(weblogData=>{
-        if(weblogData[0]){
-            return res.json(weblogData)
-        } else {
-            return res.status(404).json({msg:"No Such Record."})
-        }
+       res.json(weblogData)
     })
     .catch(err=>{
         console.log(err);
@@ -70,7 +66,7 @@ router.put("/:id",(req,res)=>{
  })
 
 router.delete("/:id", (req,res)=>{
-   if(!req.session.userId){
+   if(req.session.userId){
       Weblog.findByPk(req.params.id,{
          include:[User]
      })
@@ -78,9 +74,11 @@ router.delete("/:id", (req,res)=>{
         if(!weblogData){
          res.status(404).json({msg:"No such post!"})
         } else if(weblogData.UserId===req.session.userId){
-         Weblog.destroy({where: {
+         Weblog.destroy({
+            where:{
             id:req.params.id
-         }})
+            }
+         })
          .then(() => {
             return res.send("Post deleted!")
          })

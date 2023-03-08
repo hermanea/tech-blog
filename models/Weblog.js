@@ -8,7 +8,7 @@ Weblog.init({
         type: DataTypes.STRING,
         allowNull:false
     },
-    post: {
+    text: {
          type: DataTypes.TEXT,
          allowNull:false
     }

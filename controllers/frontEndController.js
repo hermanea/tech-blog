@@ -25,12 +25,7 @@ router.get("/signup",(req,res)=>{
 router.get("/dashboard", (req,res)=>{
     if(req.session.userId){
         User.findByPk(req.session.userId,{
-            include:[{
-                model:Weblog,
-                include:{
-                    model:Comment
-                }
-            }, Comment]
+            include:[Weblog]
         })
         .then(userData => {
             const hbsUser = userData.toJSON()
@@ -50,10 +45,10 @@ router.get("/homepage",(req,res)=>{
             include:[User, Comment]
         })
         .then(userData => {
-            const hbsUser = userData.map(post=>post.toJSON())
+            const hbsUser = userData.map(weblog=>weblog.toJSON())
             const session = JSON.stringify(req.session)
             res.render("homepage", {
-                posts:hbsUser, session
+                weblogs:hbsUser, session
             })
         })
     } else {
