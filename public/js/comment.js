@@ -1,6 +1,5 @@
-// const weblogId = window.location.href.split('/').pop();
 
-document.querySelector("#weblogComment").addEventListener("click",event=>{
+document.querySelector("#weblogComment").addEventListener("click",(event) => {
     event.preventDefault();
     const loginObj = {
         text:document.querySelector("#weblogComment").value, 

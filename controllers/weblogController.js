@@ -5,11 +5,9 @@ const {User,Weblog,Comment} = require('../models');
 router.get("/", (req,res)=>{
     Weblog.findAll({
         include:[User,Comment]
-    })
-    .then(weblogData=>{
+    }).then(weblogData=>{
         res.json(weblogData)
-    })
-    .catch(err=>{
+    }).catch(err=>{
         console.log(err);
         res.status(500).json({msg:"Error.",err})
     })
@@ -17,34 +15,26 @@ router.get("/", (req,res)=>{
 
 router.get("/:id", (req,res)=>{
     Weblog.findByPk(req.params.id,{
-        include:[User, Comment]
-    })
-    .then(weblogData=>{
+        include:[User,Comment]
+    }).then(weblogData=>{
        res.json(weblogData)
-    })
-    .catch(err=>{
+    }).catch(err=>{
        console.log(err);
        res.status(500).json({msg:"Error.",err})
     })
 })
 
 router.post("/", (req,res)=>{
-   if(req.session.userId){
-      Weblog.create({
-         title:req.body.title,
-         text:req.body.text,
-         UserId:req.session.userId
-     })
-     .then(weblogData=>{
-        res.json(weblogData)
-     })
-     .catch(err=>{
-        console.log(err);
-        res.status(500).json({msg:"Error.",err})
-     })
-  } else {
-      res.status(403).json({msg:"Login to post!"})
-  }
+   Weblog.create({
+      title:req.body.title,
+      text:req.body.text,
+      UserId:req.session.userId
+   }).then(weblogData=>{
+      res.json(weblogData)
+   }).catch(err=>{
+      console.log(err);
+      res.status(500).json({msg:"Error.",err})
+   })
 })
 
 router.put("/:id",(req,res)=>{
@@ -52,21 +42,15 @@ router.put("/:id",(req,res)=>{
         where:{
             id:req.params.id
         }
-    })
-    .then(weblogData=>{
+    }).then(weblogData=>{
        res.json(weblogData)
-    })
-    .catch(err=>{
+    }).catch(err=>{
         console.log(err);
-        res.status(500).json({
-            msg:"Error.",
-            err:err
-        })
+        res.status(500).json({msg:"Error.",err})
     })
  })
 
 router.delete("/:id", (req,res)=>{
-   if(req.session.userId){
       Weblog.findByPk(req.params.id,{
          include:[User]
      })
@@ -78,17 +62,14 @@ router.delete("/:id", (req,res)=>{
             where:{
             id:req.params.id
             }
-         })
-         .then(() => {
+         }).then(() => {
             return res.send("Post deleted!")
          })
         }
-     })
-     .catch(err=>{
+     }).catch(err=>{
         console.log(err);
-        res.status(500).json({msg:"An error occured.",err})
+        res.status(500).json({msg:"Error.",err})
      })
-   }
 })
 
 module.exports = router;

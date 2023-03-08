@@ -9,7 +9,7 @@ postTitles.forEach((postTitle, index) => {
   });
 
 // Event listener that edits the user's post on button click.
-document.querySelector(".updateWeblotBtn").addEventListener("click", (event) => {
+document.querySelector(".updateWeblogBtn").addEventListener("submit", (event) => {
     event.preventDefault();
     const loginObj = {
         title:document.querySelector("#updateTitle").value,
@@ -34,7 +34,7 @@ document.querySelector(".updateWeblotBtn").addEventListener("click", (event) => 
 })
 
 // Event listener that delete's the user's post on button click.
-document.querySelector(".removeWeblogBtn").addEventListener("click", (event) => {
+document.querySelector(".removeWeblogBtn").addEventListener("submit", (event) => {
     event.preventDefault();
     const weblogId = btn.getAttribute("data-id")
     fetch(`/api/weblogs/${weblogId}`,{

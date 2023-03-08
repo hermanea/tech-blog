@@ -5,11 +5,9 @@ const {User,Weblog,Comment} = require('../models');
 router.get("/", (req,res)=>{
     Comment.findAll({
        include:[User,Weblog]
-    })
-    .then(weblogData=>{
+    }).then(weblogData=>{
        res.json(weblogData)
-    })
-    .catch(err=>{
+    }).catch(err=>{
        console.log(err);
        res.status(500).json({msg:"Error.",err})
     })
@@ -18,40 +16,32 @@ router.get("/", (req,res)=>{
 router.get("/:id", (req,res)=>{
     Comment.findByPk(req.params.id,{
         include:[User,Weblog]
-    })
-    .then(commentData=>{
+    }).then(commentData=>{
         res.json(commentData)
-    })
-    .catch(err=>{
+    }).catch(err=>{
         console.log(err);
         res.status(500).json({msg:"Error.",err})
     })
 })
    
 router.post("/", (req,res)=>{
-    if(req.session.userId){
-        Comment.create({
-            WeblogId:req.body.WeblogId,
-            text:req.body.text,
-            UserId:req.session.UserId
-    })
-    .then(commentData=>{
-        res.json(commentData)
+    Comment.create({
+        WeblogId:req.body.WeblogId,
+        text:req.body.text,
+        UserId:req.session.UserId
+    }).then(weblogData=>{
+        res.json(weblogData)
     }).catch(err=>{
         console.log(err);
         res.status(500).json({msg:"Error.",err})
     })
-    } else {
-        res.status(403).json({msg:"Please login to comment."})
-    }
 })
    
 router.delete("/:id", (req,res)=>{
     if(req.session.userId){
         Comment.findByPk(req.params.id,{
         include:[User]
-    })
-    .then(commentData=>{
+    }).then(commentData=>{
         if(!commentData){
         res.status(404).json({msg:"No such comment!"})
         } else if(commentData.UserId===req.session.userId){

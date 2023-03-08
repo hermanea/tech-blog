@@ -1,67 +1,42 @@
-{{!-- <div class=""> --}}
-    {{!-- <div class=""> --}}
-        {{!-- <div class=""> --}}
-            {{#each user.Weblogs}}
-              <div class="card border">
-                  <div class="card-header border">
-                      <div class=""><h5 class="card-title"><a href="#" id="postTitle">{{title}}</a></h5></div>
-                      <div class="">Posted by: {{user.username}} on {{createdAt}}</div>
-                  </div>
-                  <div class="card-body text">
-                      <p class="card-text">{{post}}</p>
-                  </div>
-              </div>
-              <hr>
 
-              <form id="updateWeblogForm" style="display: none;">
-                <div class="form-group">
-                  <label for="updateTitle" class="form-label" id="weblogTitle">Title</label>
-                  <input class="form-control" id="updateTitle" value="{{title}}">
-                </div>
-                <div class="form-group">
-                  <label for="updateText" class="form-label">Content</label>
-                  <textarea class="form-control" id="updateText">{{post}}</textarea>
-                </div>
-                <button type="submit" class="updateWeblogBtn" data-id="{{id}}">Update</button>
-                <button type="submit" class="removeWeblogBtn" data-id="{{id}}">Delete</button>
-              </form>
-            {{/each}}
-        {{!-- </div> --}}
-    {{!-- </div> --}}
-{{!-- </div> --}}
+{{#each user.Weblogs}}
+  <div class="card border">
+      <div class="card-header border">
+          <div class=""><h5 class="card-title"><a href="#" id="postTitle">{{title}}</a></h5></div>
+          <div class="">Posted by: {{user.username}} on {{createdAt}}</div>
+      </div>
+      <div class="card-body text">
+          <p class="card-text">{{post}}</p>
+      </div>
+  </div>
 
+  <form id="updateWeblogForm" style="display: none;">
+    <div class="form-group">
+      <label for="updateTitle" class="form-label" id="weblogTitle">Title</label>
+      <input class="form-control" id="updateTitle" value="{{title}}">
+    </div>
+    <div class="form-group">
+      <label for="updateText" class="form-label">Content</label>
+      <textarea class="form-control" id="updateText" value="{{text}}">{{text}}</textarea>
+    </div>
+    <button type="submit" class="updateWeblogBtn" data-id="{{id}}">Update</button>
+    <button type="submit" class="removeWeblogBtn" data-id="{{id}}">Delete</button>
+  </form>
+{{/each}}
 
-{{!-- <div class=""> --}}
-  {{!-- <div class=""> --}}
-    {{!-- <div class=""> --}}
-      <form id="newWeblogForm" style="display: none;">
-        <div class="form-group">
-          <label for="exampleFormControlInput1" class="form-label">Title</label>
-          <input class="form-control" id="weblogTitle">
-        </div>
-        <div class="form-group">
-          <label for="exampleFormControlTextArea" class="form-label">Content</label>
-          <textarea class="form-control" id="weblogText"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary" id="newWeblogBtn">Create</button>
-      </form>
-      <button type="click" class="btn btn-primary" id="showFormBtn">+ New Post</button>
-    {{!-- </div> --}}
-  {{!-- </div> --}}
-{{!-- </div> --}}
-
-{{!-- <form id="updateWeblogForm" style="display: none;">
+<form id="newWeblogForm" style="display: none;">
   <div class="form-group">
-    <label for="updateTitle" class="form-label" id="weblogTitle"></label>
-    <input class="form-control" id="updateTitle" value="{{title}}">
+    <label for="exampleFormControlInput1" class="form-label">Title</label>
+    <input class="form-control" id="weblogTitle">
   </div>
   <div class="form-group">
-    <label for="updateText" class="form-label">Content</label>
-    <textarea class="form-control" id="updateText">{{post}}</textarea>
+    <label for="exampleFormControlTextArea" class="form-label">Content</label>
+    <textarea class="form-control" id="weblogText"></textarea>
   </div>
-  <button type="submit" class="btn btn-primary" id="updateWeblogBtn">Update</button>
-  <button type="submit" class="btn btn-primary" id="removeWeblogBtn">Delete</button>
-</form> --}}
+  <button type="submit" class="btn btn-primary" id="newWeblogBtn">Create</button>
+</form>
+<button type="click" class="btn btn-primary" id="showFormBtn">+ New Post</button>
+
 
 <script src="/js/dashboard.js"></script>
 <script src="/js/update.js"></script>
