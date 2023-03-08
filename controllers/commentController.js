@@ -13,7 +13,7 @@ router.get("/", (req,res)=>{
        console.log(err);
        res.status(500).json({msg:"Error.",err})
     })
-   })
+})
    
 router.get("/:id", (req,res)=>{
     Comment.findByPk(req.params.id,{
@@ -72,3 +72,5 @@ router.delete("/:id", (req,res)=>{
         res.status(403).json({msg:"Please login to delete a comment!"})
     }
 })
+
+module.exports = router;
