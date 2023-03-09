@@ -35,7 +35,7 @@ router.get("/homepage", async (req,res) => {
         });
         const weblogs = weblogData.map((weblog) => weblog.get({ plain: true }));
         console.log(weblogs);
-        res.render("home", {
+        res.render("homepage", {
           weblogs,
           logged_in: req.session.logged_in,
         })

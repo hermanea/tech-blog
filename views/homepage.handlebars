@@ -1,34 +1,29 @@
-{{!-- <div class=""> --}}
-    {{!-- <div class=""> --}}
-        {{!-- <div class=""> --}}
-            {{#each Weblogs.User}}
-                <div class="card border weblog">
-                    <div class="card-header border">
-                        <div class=""><h5 class="card-title"><a href="/{{id}}">{{title}}</a></h5></div>
-                        <div class="">Posted by: {{User}} on {{createdAt}}</div>
-                        <div><p class="card-text">{{post}}</p></div>
-                    </div>
-                    <form class="commentForm" style="display:none;">
-                        <label for="exampleFormControlTextarea1" class="form-label">Add a Comment</label>
-                        <textarea class="form-control" id="addComment" rows="3"></textarea>
-                        <button type="submit">Submit</button>
-                    </form>
 
-                    <div class="weblogComments" stlye="display:none;">
-                        {{#each weblog.Comments}}
-                            <div class="">
-                                {{text}} 
-                            
-                                posted by: {{User.username}} @ {{createdAt}}
-                            </div>
-                        {{/each}}
-                    </div>
-                    
+{{#each Weblogs.User}}
+    <div class="card border weblog">
+        <div class="card-header border">
+            <div class=""><h5 class="card-title"><a href="/{{id}}">{{title}}</a></h5></div>
+            <div class="">Posted by: {{User}} on {{createdAt}}</div>
+            <div><p class="card-text">{{post}}</p></div>
+        </div>
+        <form class="commentForm" style="display:none;">
+            <label for="exampleFormControlTextarea1" class="form-label">Add a Comment</label>
+            <textarea class="form-control" id="addComment" rows="3"></textarea>
+            <button type="submit">Submit</button>
+        </form>
+
+        <div class="weblogComments" stlye="display:none;">
+            {{#each weblog.Comments}}
+                <div class="">
+                    {{text}} 
+                
+                    posted by: {{User.username}} @ {{createdAt}}
                 </div>
             {{/each}}
-        {{!-- </div> --}}
-    {{!-- </div> --}}
-{{!-- </div> --}}
+        </div>
+        
+    </div>
+{{/each}}
 
 <script src="/js/comment.js"></script>
 
