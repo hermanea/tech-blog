@@ -4,12 +4,12 @@ const sequelize = require('../config/connection');
 class Comment extends Model {}
 
 Comment.init({
-    text: {
-         type: DataTypes.TEXT,
-         allowNull:false
+    content: {
+         type: DataTypes.STRING,
+         allowNull: false,
     }
 },{
     sequelize
 });
 
-module.exports=Comment
+module.exports = Comment;

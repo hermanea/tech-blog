@@ -6,14 +6,14 @@ class Weblog extends Model {}
 Weblog.init({
     title: {
         type: DataTypes.STRING,
-        allowNull:false
+        allowNull: false,
     },
-    text: {
+    content: {
          type: DataTypes.TEXT,
-         allowNull:false
+         allowNull: false,
     }
 },{
     sequelize
 });
 
-module.exports=Weblog
+module.exports = Weblog;

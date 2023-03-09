@@ -12,26 +12,26 @@ showFormBtn.addEventListener('click', (event) => {
     }
 });
 
-// Event listener to post new weblog on button click.
 document.querySelector("#newWeblogForm").addEventListener("submit", (event) => {
     event.preventDefault();
-    const loginObj = {
-        title:document.querySelector("#weblogTitle").value,
-        text:document.querySelector("#weblogText").value
+    const newWeblogObj = {
+        title: document.querySelector("#weblogTitle").value,
+        text: document.querySelector("#weblogText").value
     }
-    console.log(loginObj);
-    fetch("/api/weblogs",{
-        method:"POST",
-        body:JSON.stringify(loginObj),
+    console.log(newWeblogObj);
+    fetch("/api/weblogs", {
+        method: "POST",
+        body: JSON.stringify(newWeblogObj),
         headers:{
             "Content-Type":"application/json"
         }
     })
-    .then(res=>{
-        if(res.ok){
-           location.href="/dashboard"
+    .then(res => {
+        if (res.ok){
+            location.href="/dashboard"
         } else {
             alert("Error.")
         }
     })
 })
+

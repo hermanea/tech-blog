@@ -7,23 +7,23 @@ class User extends Model {}
 User.init({
     username: {
         type: DataTypes.STRING,
-        allowNull:false,
+        allowNull: false,
    },
     password:{
-        type:DataTypes.STRING,
-        allowNull:false,
-        validate:{
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
             len:[8]
-        }
+        },
     }
 },{
     sequelize,
     hooks:{
-        beforeCreate:userObj=>{
-            userObj.password = bcrypt.hashSync(userObj.password,4);
+        beforeCreate: (userObj) =>{
+            userObj.password = bcrypt.hashSync(userObj.password, 4);
             return userObj;
         }
     }
 });
 
-module.exports=User
+module.exports = User;
