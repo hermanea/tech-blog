@@ -13,22 +13,22 @@ router.get("/", (req,res)=>{
     })
 });
    
-// router.get("/:id", (req,res)=>{
-//     Comment.findByPk(req.params.id,{
-//         include:[User,Weblog]
-//     }).then(commentData=>{
-//         res.json(commentData)
-//     }).catch(err=>{
-//         console.log(err);
-//         res.status(500).json({msg:"Error.",err})
-//     })
-// })
+router.get("/:id", (req,res)=>{
+    Comment.findByPk(req.params.id,{
+        include:[User,Weblog]
+    }).then(commentData=>{
+        res.json(commentData)
+    }).catch(err=>{
+        console.log(err);
+        res.status(500).json({msg:"Error.",err})
+    })
+})
    
 router.post("/", (req,res)=>{
     Comment.create({
         content: req.body.content,
-        userId: req.session.userId,
-        blogId: req.params.blogId,
+        UserId: req.session.userId,
+        WeblogId: req.params.weblogId,
     })
     .then(weblogData=>{
         res.json(weblogData)

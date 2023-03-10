@@ -1,13 +1,11 @@
 const express = require('express');
-const sequelize = require('../config/connection');
 const router = express.Router();
 const { User, Weblog, Comment } = require('../models');
-const { Op } = require("sequelize");
 
 router.get("/", (req,res)=>{
     Weblog.findAll()
     .then(weblogData=>{
-        res.json(weblogData);
+        res.json(weblogData)
     })
     .catch(err=>{
         console.log(err);
@@ -16,15 +14,11 @@ router.get("/", (req,res)=>{
 });
 
 router.get("/:id", (req,res)=>{
-    Weblog.findByPk(req.params.id)
+    Weblog.findByPk(req.params.id, {
+        include:[User]
+    })
     .then(weblogData=>{
-       if (weblogData) {
-        return res.json(weblogData);
-       } else {
-        res.status(404).json({
-            message: "Record does not exist.",
-        })
-       }
+        res.json(weblogData)
     })
     .catch(err=>{
        console.log(err);
@@ -36,7 +30,7 @@ router.post("/", (req,res)=>{
     Weblog.create({
         title: req.body.title,
         content: req.body.content,
-        UserId: req.session.user_id,
+        UserId: req.session.userId,
     })
     .then(weblogData=>{
     res.json(weblogData);
@@ -75,24 +69,33 @@ router.put("/:id",(req,res)=>{
 });
 
 router.delete("/:id", (req,res)=>{
-    Weblog.destroy({
-    where: {
-        id:req.params.id,
-    },
-    })
-    .then((weblogData) => {
-        if (weblogData) {
-            return res.json(data);
-      } else {
-        return res.status(404).json({
-          message: "Record does not exist.",
-        });
-    }
+    if(!req.session.userId){
+        return res.status(403).json({msg:"Please login."})
+     }
+     console.log(req.body);
+     Weblog.findByPk(req.params.id).then(weblogData=>{
+        if(!weblogData){
+           return res.status(404).json({msg:"No such post."})
+        } else if (weblogData.UserId!== req.session.userId){
+           return res.status(403).json({msg:"Not your post!"})
+        }
+        Weblog.destroy({
+        where: {
+            id:req.params.id,
+        }
+        })
+        .then((weblogData) => {
+            res.json(weblogData)
+        })
+        .catch(err=>{
+            console.log(err);
+            res.status(500).json({msg:"Error.",err})
+        })
     })
     .catch(err=>{
         console.log(err);
-        res.status(500).json({msg:"Error.",err})
+        res.status(500).json({msg:"Error,",err})
     })
-});
+})
 
 module.exports = router;

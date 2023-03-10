@@ -40,6 +40,6 @@ app.get("/sessions", (req, res) => {
 
 sequelize.sync({ force: false }).then(function() {
     app.listen(PORT, function() {
-    console.log(`App listening at port ${PORT}`);
+    console.log('App listening on PORT ' + PORT);
     });
 });

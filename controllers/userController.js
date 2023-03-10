@@ -1,9 +1,7 @@
 const express = require('express');
-const sequelize = require('../config/connection');
 const router = express.Router();
 const { User, Weblog, Comment } = require('../models');
-const { Op } = require("sequelize");
-
+const bcrypt = require("bcrypt");
 
 router.get("/", (req,res) => {
     User.findAll()
@@ -24,7 +22,7 @@ router.post("/login", (req,res) => {
     User.findOne({
         where:{
             username: req.body.username,
-        },
+        }
     })
     .then(userData=>{
         if(!userData){
@@ -33,7 +31,6 @@ router.post("/login", (req,res) => {
             if(bcrypt.compareSync(req.body.password, userData.password)) {
                 req.session.userId = userData.id;
                 req.session.username = userData.username;
-                req.session.logged_in = true;
                 return res.json(userData);
             } else {
                 res.status(401).json({msg:"Incorrect user information."})
@@ -47,15 +44,11 @@ router.post("/login", (req,res) => {
 });
 
 router.get("/:id", (req,res) => {
-    User.findByPk(req.params.id)
+    User.findByPk(req.params.id, {
+        include:[Weblog]
+    })
     .then(userData=>{
-        if (userData) {
-            return res.json(data);
-        } else {
-            res.status(404).json({
-                message: "Record does not exist.",
-            })
-        }
+        res.json(userData)
     })
     .catch(err=>{
         console.log(err);
@@ -64,14 +57,14 @@ router.get("/:id", (req,res) => {
 });
    
 router.post("/", (req,res) => {
+    console.log(req.body);
     User.create({
         username: req.body.username,
-        password: req.body.password,
+        password: req.body.password
     })
     .then(userData=>{
-        req.session.user_id = userData.id;
+        req.session.userId = userData.id;
         req.session.username = userData.username;
-        req.session.logged_in = true;
         res.json(userData)
     })
     .catch(err=>{

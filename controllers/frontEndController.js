@@ -2,30 +2,51 @@ const express = require('express');
 const router = express.Router();
 const { User, Weblog, Comment } = require("../models");
 
-router.get("/", (req,res)=>{
-    if(req.session.logged_in){
-        res.redirect("/homepage");
-    } else {
-        res.redirect("/login");
-    }
-});
+// router.get("/", (req,res)=>{
+//     if(req.session.logged_in){
+//         res.redirect("/homepage");
+//     } else {
+//         res.redirect("/login");
+//     }
+// });
 
-router.get("/sessions", (req,res) => {
-    res.json(req.session);
-});
+router.get("/",(req,res)=>{
+  Weblog.findAll({
+      include:[User]
+  }).then(weblogData=>{
+      console.log(weblogData)
+      const hbsWeblogs = weblogData.map(weblog=>weblog.toJSON())
+      console.log(hbsWeblogs)
+      res.render("homepage",{
+          allWeblogs:hbsWeblogs
+      })
+  })
+})
 
 router.get("/login",(req,res)=>{
-    if(req.session.logged_in){
-        res.redirect("/homepage");
-    } else {
-        res.render("login");
-    }
-});
+        res.render("login")
+})
 
 router.get("/signup",(req,res)=>{
     res.render("signup")
-});
+})
 
+
+router.get("/dashboard", (req,res) => {
+    if (!req.session.userId) {
+      return res.redirect("/login")
+    }
+    User.findByPk(req.session.userId,{
+        include: [Weblog]
+      })
+      .then(userData=>{
+        console.log(userData)
+        const userHbs = userData.toJSON();
+        console.log(userHbs)
+        res.render("dashboard", userHbs)
+      })
+    })
+    
 router.get("/homepage", async (req,res) => {
     try {
       if (req.session.logged_in) {
@@ -50,31 +71,10 @@ router.get("/homepage", async (req,res) => {
     }
 });
 
-router.get("/dashboard", async (req,res) => {
-    if (!req.session.logged_in) {
-      res.redirect("/login");
-    } else {
-      const userData = await User.findByPk(req.session.user_id, {
-        include: {
-          model: Weblog,
-          include: {
-            model: Comment,
-          },
-        },
-      })
-      if (!userData) {
-        res.redirect("/login");
-      }
-      const userHbs = userData.toJSON();
-      console.log(userHbs);
-      res.render("dashboard", userHbs);
-    }
-  });
-
-// router.get('/post/:id', (req,res) => {
-//     Blog.findByPk(req.params.id,{
-//         include:[{
-//             model:Comment,
+    // router.get('/post/:id', (req,res) => {
+      //     Blog.findByPk(req.params.id,{
+        //         include:[{
+          //             model:Comment,
 //             include:{
 //                 model:User
 //             }

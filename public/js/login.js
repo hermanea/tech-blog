@@ -1,4 +1,4 @@
-document.querySelector('#loginForm').addEventListener("submit" , event =>{
+document.querySelector('#loginForm').addEventListener("submit" ,event=>{
     event.preventDefault();
     const loginObj = {
         username:document.querySelector('#loginUsername').value,
@@ -13,11 +13,10 @@ document.querySelector('#loginForm').addEventListener("submit" , event =>{
         }
     })
     .then(res=>{
-        console.log(res);
         if(res.ok){
            location.href="/homepage"
         } else {
-            alert("Login failed.")
+            alert("trumpet sound")
         }
     })
 })

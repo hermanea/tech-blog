@@ -1,4 +1,4 @@
-document.querySelector('#signupForm').addEventListener("submit" , event =>{
+document.querySelector('#signupForm').addEventListener("submit" ,event=>{
     event.preventDefault();
     const signUpObj = {
         username:document.querySelector('#signupUsername').value,
@@ -16,7 +16,7 @@ document.querySelector('#signupForm').addEventListener("submit" , event =>{
         if(res.ok){
            location.href="/homepage"
         } else {
-            alert("An account for this user already exists.")
+            alert("trumpet sound")
         }
     })
 })

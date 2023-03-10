@@ -1,37 +1,34 @@
-const showFormBtn = document.querySelector('#showFormBtn');
-const newWeblogForm = document.querySelector('#newWeblogForm');
-const newWeblogBtn = document.querySelector('#newWeblogBtn');
+const showFormBtn = document.querySelector("#showFormBtn");
+const createWeblogForm = document.querySelector("#createWeblogForm");
+// const createWeblogBtn = document.querySelector("#createWeblogBtn");
 
-// Display new weblog form on button click.
-showFormBtn.addEventListener('click', (event) => {
+showFormBtn.addEventListener("click",event=>{
     event.preventDefault();
-    if (newWeblogForm.style.display === 'none') {
-        newWeblogForm.style.display = 'block';
+    if (createWeblogForm.style.display === 'none') {
+        createWeblogForm.style.display = 'block';
     } else {
-        newWeblogForm.style.display = 'none';
+        createWeblogForm.style.display = 'none';
     }
 });
 
-document.querySelector("#newWeblogForm").addEventListener("submit", (event) => {
+createWeblogForm.addEventListener("submit",event=>{
     event.preventDefault();
-    const newWeblogObj = {
+    const weblogObj = {
         title: document.querySelector("#weblogTitle").value,
-        text: document.querySelector("#weblogText").value
+        content: document.querySelector("#weblogContent").value
     }
-    console.log(newWeblogObj);
-    fetch("/api/weblogs", {
+    console.log(weblogObj)
+    fetch("/api/weblogs",{
         method: "POST",
-        body: JSON.stringify(newWeblogObj),
+        body: JSON.stringify(weblogObj),
         headers:{
             "Content-Type":"application/json"
         }
-    })
-    .then(res => {
-        if (res.ok){
-            location.href="/dashboard"
+    }).then(res=>{
+        if(res.ok){
+            location.reload()
         } else {
-            alert("Error.")
+            alert("trumpet sound")
         }
     })
 })
-
