@@ -71,10 +71,10 @@ router.get("/homepage", async (req,res) => {
     }
 });
 
-    // router.get('/post/:id', (req,res) => {
-      //     Blog.findByPk(req.params.id,{
-        //         include:[{
-          //             model:Comment,
+//     router.get('/post/:id', (req,res) => {
+//           Blog.findByPk(req.params.id,{
+//                 include:[{
+//                       model:Comment,
 //             include:{
 //                 model:User
 //             }

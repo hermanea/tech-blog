@@ -3,42 +3,29 @@
   <div class="card border">
       <div class="card-header border">
           <div class=""><h5 class="card-title"><a href="#" id="postTitle">{{title}}</a></h5></div>
-          <div class="">Posted by: {{user.username}} on {{createdAt}}</div>
+          <div class="">Posted by: {{username}} on {{createdAt}}</div>
       </div>
       <div class="card-body text">
-          <p class="card-text">{{content}}</p>
+          <p class="card-text" id="postTexts">{{content}}</p>
       </div>
   </div>
 
-  <form id="updateWeblogForm" style="display: none;">
-    <div class="form-group">
-      <label for="updateTitle" class="form-label" id="weblogTitle">Title</label>
-      <input class="form-control" id="updateTitle" value="{{title}}">
-    </div>
-    <div class="form-group">
-      <label for="updateText" class="form-label">Content</label>
-      <textarea class="form-control" id="updateText" value="{{text}}"></textarea>
-    </div>
-    <button type="submit" class="updateWeblogBtn" data-id="{{id}}">Update</button>
-    <button type="submit" class="removeWeblogBtn" data-id="{{id}}">Delete</button>
+  <form id="updateForm" style="display: none;">
+      <input id="updateTitle" value="{{title}}">
+      <textarea id="updateText">{{content}}</textarea>
+      <button class="updateBtn">Update</button>
+    {{!-- <button type="click" id="updateWeblogBtn">Update</button> --}}
+    {{!-- <button type="click" id="removeWeblogBtn">Delete</button> --}}
   </form>
 {{/each}}
 
 <form id="createWeblogForm" style="display: none;">
-  <div class="form-group">
-    <label for="weblogTitle" class="form-label">Title</label>
-    <input type="text" class="form-control" id="weblogTitle" value="">
-  </div>
-  <div class="form-group">
-    <label for="weblogContent" class="form-label">Content</label>
-    <textarea class="form-control" id="weblogContent" value=""></textarea>
-  </div>
-  <div class="form-group">
-    <button type="submit" class="btn btn-primary" id="createWeblogBtn">Create</button>
-  </div>
+    <input type="text" id="weblogTitle" placeholder="Title">
+    <textarea id="weblogContent" placeholder="Content"></textarea>
+    <button type="submit" id="createWeblogBtn">Create</button>
 </form>
 <button type="click" class="btn btn-primary" id="showFormBtn">+ New Post</button>
 
 
 <script src="/js/dashboard.js"></script>
-{{!-- <script src="/js/update.js"></script> --}}
+<script src="/js/update.js"></script>

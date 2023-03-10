@@ -13,6 +13,22 @@ router.get("/", (req,res)=>{
     })
 });
 
+// router.get("/:id", (req,res)=>{
+//     Weblog.findByPk(req.params.id, {
+//         include:[User]
+//     })
+//     .then(weblogData=>{
+//         res.render("weblog", {
+//             weblog: weblogData,
+//             username: weblogData.User.username
+//           });
+//     })
+//     .catch(err=>{
+//        console.log(err);
+//        res.status(500).json({msg:"Error.",err})
+//     })
+// });
+
 router.get("/:id", (req,res)=>{
     Weblog.findByPk(req.params.id, {
         include:[User]
@@ -20,6 +36,7 @@ router.get("/:id", (req,res)=>{
     .then(weblogData=>{
         res.json(weblogData)
     })
+    console.log(weblogData)
     .catch(err=>{
        console.log(err);
        res.status(500).json({msg:"Error.",err})
@@ -45,7 +62,7 @@ router.put("/:id",(req,res)=>{
     Weblog.update(
         {
             title: req.body.title,
-            content: req.body.content,
+            content: req.body.content
         },
         {
         where: {
