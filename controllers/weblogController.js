@@ -3,7 +3,9 @@ const router = express.Router();
 const { User, Weblog, Comment } = require('../models');
 
 router.get("/", (req,res)=>{
-    Weblog.findAll()
+    Weblog.findAll({
+        include:[User,Comment]
+    })
     .then(weblogData=>{
         res.json(weblogData)
     })
@@ -13,30 +15,14 @@ router.get("/", (req,res)=>{
     })
 });
 
-// router.get("/:id", (req,res)=>{
-//     Weblog.findByPk(req.params.id, {
-//         include:[User]
-//     })
-//     .then(weblogData=>{
-//         res.render("weblog", {
-//             weblog: weblogData,
-//             username: weblogData.User.username
-//           });
-//     })
-//     .catch(err=>{
-//        console.log(err);
-//        res.status(500).json({msg:"Error.",err})
-//     })
-// });
-
 router.get("/:id", (req,res)=>{
     Weblog.findByPk(req.params.id, {
-        include:[User]
+        include: [User,Comment]
     })
     .then(weblogData=>{
-        res.json(weblogData)
+        console.log(weblogData)
+        res.json(weblogData);
     })
-    console.log(weblogData)
     .catch(err=>{
        console.log(err);
        res.status(500).json({msg:"Error.",err})
@@ -47,7 +33,7 @@ router.post("/", (req,res)=>{
     Weblog.create({
         title: req.body.title,
         content: req.body.content,
-        UserId: req.session.userId,
+        UserId: req.session.userId
     })
     .then(weblogData=>{
     res.json(weblogData);
@@ -66,7 +52,7 @@ router.put("/:id",(req,res)=>{
         },
         {
         where: {
-            id:req.params.id
+            id: req.params.id
         },
     }
     )
@@ -90,7 +76,9 @@ router.delete("/:id", (req,res)=>{
         return res.status(403).json({msg:"Please login."})
      }
      console.log(req.body);
-     Weblog.findByPk(req.params.id).then(weblogData=>{
+     Weblog.findByPk(req.params.id,{
+        include:[User]
+     }).then(weblogData=>{
         if(!weblogData){
            return res.status(404).json({msg:"No such post."})
         } else if (weblogData.UserId!== req.session.userId){

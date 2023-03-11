@@ -7,10 +7,10 @@ router.use("/api/weblogs", weblogRoutes);
 const userRoutes = require("./userController");
 router.use("/api/users", userRoutes);
 
-const commentRoutes = require("./commentController");
-router.use("/api/comments", commentRoutes);
-
 const frontEndRoutes = require("./frontEndController");
 router.use("/", frontEndRoutes);
+
+const commentRoutes = require("./commentController");
+router.use("/api/comments", commentRoutes);
 
 module.exports = router;

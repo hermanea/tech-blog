@@ -3,9 +3,11 @@ const router = express.Router();
 const { User, Weblog, Comment } = require('../models');
 
 router.get("/", (req,res)=>{
-    Comment.findAll()
-    .then(weblogData=>{
-       res.json(weblogData)
+    Comment.findAll({
+      include:[User,Weblog]
+    })
+    .then(commentData=>{
+       res.json(commentData)
     })
     .catch(err=>{
        console.log(err);
@@ -26,12 +28,10 @@ router.get("/:id", (req,res)=>{
    
 router.post("/", (req,res)=>{
     Comment.create({
-        content: req.body.content,
-        UserId: req.session.userId,
-        WeblogId: req.params.weblogId,
+        content: req.body.content
     })
-    .then(weblogData=>{
-        res.json(weblogData)
+    .then(commentData=>{
+        res.json(commentData)
     })
     .catch(err=>{
         console.log(err);
@@ -89,5 +89,21 @@ router.delete("/:id", (req, res) => {
         })
     })
 });
+
+router.get("/post/:id", (req,res)=>{
+  Weblog.findByPk(req.params.id,{
+     include:[{
+        model:Comment,
+        include:{
+            model:User
+        }
+    }]
+  }).then(commentData=>{
+     res.json(commentData)
+  }).catch(err=>{
+     console.log(err);
+     res.status(500).json({msg:"An error occured",err})
+  })
+})
 
 module.exports = router;

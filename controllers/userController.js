@@ -6,6 +6,7 @@ const bcrypt = require("bcrypt");
 router.get("/", (req,res) => {
     User.findAll()
     .then(userData=> {
+        console.log(userData)
         res.json(userData)
     }).catch(err=>{
         console.log(err);
@@ -18,36 +19,12 @@ router.get("/logout", (req,res) => {
     res.redirect("/login")
 });
    
-router.post("/login", (req,res) => {
-    User.findOne({
-        where:{
-            username: req.body.username,
-        }
-    })
-    .then(userData=>{
-        if(!userData){
-            res.status(401).json({msg:"Incorrect user information."})
-        } else {
-            if(bcrypt.compareSync(req.body.password, userData.password)) {
-                req.session.userId = userData.id;
-                req.session.username = userData.username;
-                return res.json(userData);
-            } else {
-                res.status(401).json({msg:"Incorrect user information."})
-            }
-        }
-    })
-    .catch(err=>{
-        console.log(err);
-        res.status(500).json({msg:"Error.",err})
-    })
-});
-
 router.get("/:id", (req,res) => {
-    User.findByPk(req.params.id, {
+    User.findByPk(req.params.id,{
         include:[Weblog]
     })
     .then(userData=>{
+        console.log(userData)
         res.json(userData)
     })
     .catch(err=>{
@@ -72,5 +49,30 @@ router.post("/", (req,res) => {
         res.status(500).json({msg:"Error.",err})
     })
 })
+
+router.post("/login", (req,res) => {
+    User.findOne({
+        where:{
+            username: req.body.username,
+        }
+    })
+    .then(userData=>{
+        if(!userData){
+            res.status(401).json({msg:"Incorrect user information."})
+        } else {
+            if(bcrypt.compareSync(req.body.password, userData.password)) {
+                req.session.userId = userData.id;
+                req.session.username = userData.username;
+                return res.json(userData);
+            } else {
+                res.status(401).json({msg:"Incorrect user information."})
+            }
+        }
+    })
+    .catch(err=>{
+        console.log(err);
+        res.status(500).json({msg:"Error.",err})
+    })
+});
    
 module.exports = router;

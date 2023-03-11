@@ -1,22 +1,21 @@
 
 {{#each Weblogs}}
-  <div class="card border">
-      <div class="card-header border">
-          <div class=""><h5 class="card-title"><a href="#" id="postTitle">{{title}}</a></h5></div>
-          <div class="">Posted by: {{username}} on {{createdAt}}</div>
-      </div>
-      <div class="card-body text">
-          <p class="card-text" id="postTexts">{{content}}</p>
-      </div>
-  </div>
+        <div class="card border">
+            <div class="card-header border">
+                <div class=""><h5 class="card-title"><a href="#" id="postTitle" class="update-link" data-weblog-id="{{id}}">{{title}}</a></h5></div>
+                <div class="">Posted on {{createdAt}}</div>
+            </div>
+            <div class="card-body text">
+                <p class="card-text" id="postTexts">{{content}}</p>
+            </div>
+        </div>
 
-  <form id="updateForm" style="display: none;">
-      <input id="updateTitle" value="{{title}}">
-      <textarea id="updateText">{{content}}</textarea>
-      <button class="updateBtn">Update</button>
-    {{!-- <button type="click" id="updateWeblogBtn">Update</button> --}}
-    {{!-- <button type="click" id="removeWeblogBtn">Delete</button> --}}
-  </form>
+        <form id="updateForm" style="display: none;">
+            <input id="updateTitle" value="{{title}}">
+            <textarea id="updateText">{{content}}</textarea>
+            <button id="updateBtn">Update</button>
+            <button id="deleteBtn">Delete</button>
+        </form>
 {{/each}}
 
 <form id="createWeblogForm" style="display: none;">

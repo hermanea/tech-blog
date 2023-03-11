@@ -1,21 +1,21 @@
-const Weblog = require("./Weblog");
 const User = require("./User");
+const Weblog = require("./Weblog");
 const Comment = require("./Comment");
 
-Weblog.belongsTo(User, {
-    onDelete: "CASCADE",
-});
-User.hasMany(Weblog);
+Weblog.belongsTo(User,{
+    onDelete: "CASCADE"
+})
+User.hasMany(Weblog)
 
-Comment.belongsTo(User, {
-    onDelete: "CASCADE",
+Comment.belongsTo(User,{
+    onDelete: "CASCADE"
 });
-User.hasMany(Comment);
+User.hasMany(Comment)
 
 Comment.belongsTo(Weblog, {
-    onDelete: "CASCADE",
+    onDelete: "CASCADE"
 });
-Weblog.hasMany(Comment);
+Weblog.hasMany(Comment)
 
 module.exports = {
     User,
