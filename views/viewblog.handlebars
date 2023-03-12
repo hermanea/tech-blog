@@ -1,0 +1,12 @@
+>
+{{#each weblog.Comments}}
+    <div class="card border">
+        <div class="card-body text">
+            <p class="card-text" id="postTexts">{{this.content}}</p>
+        </div>
+        <div class="">
+            <div class="">Posted by: {{this.User.username}} on {{this.createdAt}}</div>
+        </div>
+    </div>
+{{/each}}
+

@@ -1,12 +1,13 @@
 const weblogTitles = document.querySelectorAll('#weblogTitle');
-const commentForms = document.querySelectorAll('#commentForm');
+// const commentForms = document.querySelectorAll('#commentForm');
+const showCommentForms = document.querySelectorAll('#showCommentForm');
 const commentBtn = document.querySelector('#commentBtn');
 const commentLink = document.querySelector('.comment-link');
 
 weblogTitles.forEach((weblogTitle, index) => {
     weblogTitle.addEventListener('click', (event) => {
         event.preventDefault();
-        commentForms[index].style.display = commentForms[index].style.display === 'none' ? 'block' : 'none';
+        showCommentForms[index].style.display = showCommentForms[index].style.display === 'none' ? 'block' : 'none';
         const commentLink = event.target;
         commentBtn.dataset.weblogId = commentLink.dataset.weblogId;
     });
@@ -14,11 +15,13 @@ weblogTitles.forEach((weblogTitle, index) => {
 
 commentBtn.addEventListener("click",(event) => {
     event.preventDefault();
+    const weblogId = event.target.dataset.weblogId;    
     const commentObj = {
-        content:document.querySelector("#addComment").value, 
+        content:document.querySelector("#addComment").value,
+        weblogId: weblogId
     }
     console.log(commentObj);
-    const weblogId = event.target.dataset.weblogId;
+    console.log(weblogId);
     fetch("/api/comments",{
         method:"POST",
         body:JSON.stringify(commentObj),
@@ -28,12 +31,14 @@ commentBtn.addEventListener("click",(event) => {
     })
     .then(res=>{
         if(res.ok){
-            location.href=`/post/${weblogId}`
+            location.href=`/viewblog/${weblogId}`
         } else {
             alert("Error.")
         }
     })
 })
+
+// fetch(`/api/comments?weblogId=${weblogId}`,{
 
 
 

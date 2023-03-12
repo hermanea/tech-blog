@@ -1,0 +1,99 @@
+*{
+    box-sizing: border-box;
+    margin:0;
+    padding:0;
+    font-family: 'Arial', sans-serif;
+}
+
+header{
+    height: 200px;
+    background-color: #ded7cd;
+    border-bottom: 1px solid #6F6C67;
+}
+
+body {
+    background-color: #c2deee;
+    padding-top: 280px;
+}
+
+.h1-container {
+    margin-left: 20px;
+}
+
+#nav-header {
+    font-size: 2.5em;
+    margin-left: 20px;
+}
+
+.navbar-nav {
+    font-size: 1.2em;
+}
+
+.navbar-nav li a:hover {
+    color: #8591DE;
+  }
+
+.navbar-nav li {
+    margin-left: 6px;
+    margin-right: 6px;
+}
+
+.form-container {
+    border: 2px solid #6F6C67;
+    border-radius: 5px;
+    background-color: #f1efeb;
+    padding: 20px;
+    width: 450px;
+}
+
+.btn {
+    background-color: #c1c7ee;
+    color: black;
+    border: 1px solid #8591DE;
+    font-size: 14px;
+    line-height: 28px;
+    height: 28x;
+}
+
+.btn-primary:hover {
+    background-color: #8591DE;
+    border-color: #43496F;
+}
+
+.otherForm a {
+    color: black;
+
+}
+
+.otherForm a:hover {
+    color:#8591DE;
+}
+
+#showFormBtn {
+    /* margin-left: 100px; */
+    margin-top: 20px;
+    /* margin-top: 300px; */
+}
+
+.custom-card {
+    margin-left: 50px;
+    margin-top: 10px;
+    width: 650px;
+    background-color: #f1efeb;
+    border: 2px solid #6F6C67;
+    border-radius: 5px;
+}
+
+#contentBox {
+    background-color: #f9f8f7;
+}
+
+#weblogTitle, #postTitle {
+    text-decoration: none;
+    color: #088da5;
+}
+
+#weblogTitle:hover {
+    text-decoration: none;
+    color: #8591DE;
+}

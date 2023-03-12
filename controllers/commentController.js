@@ -4,7 +4,12 @@ const { User, Weblog, Comment } = require('../models');
 
 router.get("/", (req,res)=>{
     Comment.findAll({
-      include:[User,Weblog]
+      include:[
+        {
+          model: User,
+          model: Weblog
+        }
+      ]
     })
     .then(commentData=>{
        res.json(commentData)
@@ -17,7 +22,8 @@ router.get("/", (req,res)=>{
    
 router.get("/:id", (req,res)=>{
     Comment.findByPk(req.params.id,{
-        include:[User,Weblog]
+        include:[{
+          moder: User,}]
     }).then(commentData=>{
         res.json(commentData)
     }).catch(err=>{
@@ -28,9 +34,13 @@ router.get("/:id", (req,res)=>{
    
 router.post("/", (req,res)=>{
     Comment.create({
-        content: req.body.content
+        content: req.body.content,
+        UserId: req.session.userId,
+        WeblogId: parseInt(req.body.weblogId)
     })
     .then(commentData=>{
+        console.log(req.body);
+        console.log(commentData);
         res.json(commentData)
     })
     .catch(err=>{

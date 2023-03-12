@@ -1,13 +1,14 @@
 const showFormBtn = document.querySelector("#showFormBtn");
 const createWeblogForm = document.querySelector("#createWeblogForm");
+const showForm = document.querySelector("#showForm");
 // const createWeblogBtn = document.querySelector("#createWeblogBtn");
 
 showFormBtn.addEventListener("click",event=>{
     event.preventDefault();
-    if (createWeblogForm.style.display === 'none') {
-        createWeblogForm.style.display = 'block';
+    if (showForm.style.display === 'none') {
+        showForm.style.display = 'block';
     } else {
-        createWeblogForm.style.display = 'none';
+        showForm.style.display = 'none';
     }
 });
 

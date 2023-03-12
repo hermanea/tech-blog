@@ -17,7 +17,33 @@ router.get("/", (req,res)=>{
 
 router.get("/:id", (req,res)=>{
     Weblog.findByPk(req.params.id, {
-        include: [User,Comment]
+        include: [
+            {
+                model: User,
+                attributes: ['id', 'username']
+            },
+            Comment
+        ]
+    })
+    .then(weblogData=>{
+        console.log(weblogData)
+        res.json(weblogData);
+    })
+    .catch(err=>{
+       console.log(err);
+       res.status(500).json({msg:"Error.",err})
+    })
+});
+
+router.get("/getweblog/:id", (req,res)=>{
+    Weblog.findByPk(req.params.id, {
+        include: [
+            {
+                model: User,
+                attributes: ['id', 'username']
+            },
+            Comment
+        ]
     })
     .then(weblogData=>{
         console.log(weblogData)
