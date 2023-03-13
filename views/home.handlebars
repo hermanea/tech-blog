@@ -3,7 +3,7 @@
   <div class="card custom-card">
       <div class="card-body">
           <div class=""><h5 class="card-title"><a href="#" id="weblogTitle" class="comment-link" data-weblog-id="{{id}}">{{title}}</a></h5></div>
-          <div class="">Posted by: {{User.username}} on {{createdAt}}</div>
+          <div class="">Posted by: <span class="username">{{User.username}}</span> on <span class="date">{{createdAt}}</span></div>
       </div>
       <div class="card-body text" id="contentBox">
           <p class="card-text" id="postTexts">{{content}}</p>
@@ -25,4 +25,3 @@
 {{/each}}
 
 <script src="/js/comment.js"></script>
-

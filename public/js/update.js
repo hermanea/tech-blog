@@ -1,12 +1,12 @@
 const postTitles = document.querySelectorAll('#postTitle');
-const updateForms = document.querySelectorAll('#updateForm');
+const showUpdateForms = document.querySelectorAll('#showUpdateForm');
 const updateLink = document.querySelector('.update-link');
 
 
 postTitles.forEach((postTitle, index) => {
     postTitle.addEventListener('click', (event) => {
       event.preventDefault();
-      updateForms[index].style.display = updateForms[index].style.display === 'none' ? 'block' : 'none';
+      showUpdateForms[index].style.display = showUpdateForms[index].style.display === 'none' ? 'block' : 'none';
     });
   });
 
@@ -28,6 +28,7 @@ document.querySelector("#updateBtn").addEventListener("click", event => {
     .then(res=>{
         if(res.ok){
             location.reload();
+            updateForms.style.display = 'none';
         } else {
             alert("trumpet sound")
         }

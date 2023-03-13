@@ -14,7 +14,7 @@ document.querySelector('#loginForm').addEventListener("submit" ,event=>{
     })
     .then(res=>{
         if(res.ok){
-           location.href="/home"
+           location.href="/dashboard"
         } else {
             alert("trumpet sound")
         }

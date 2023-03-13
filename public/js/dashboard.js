@@ -1,7 +1,6 @@
 const showFormBtn = document.querySelector("#showFormBtn");
 const createWeblogForm = document.querySelector("#createWeblogForm");
 const showForm = document.querySelector("#showForm");
-// const createWeblogBtn = document.querySelector("#createWeblogBtn");
 
 showFormBtn.addEventListener("click",event=>{
     event.preventDefault();
@@ -27,7 +26,8 @@ createWeblogForm.addEventListener("submit",event=>{
         }
     }).then(res=>{
         if(res.ok){
-            location.reload()
+            location.reload();
+            showForm.style.display = 'none';
         } else {
             alert("trumpet sound")
         }

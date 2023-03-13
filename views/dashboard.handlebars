@@ -2,8 +2,8 @@
 {{#each Weblogs}}
         <div class="card custom-card">
             <div class="card-body">
-                <div class=""><h5 class="card-title"><a href="#" id="postTitle" class="update-link" data-weblog-id="{{id}}">{{title}}</a></h5></div>
-                <div class="">Posted on {{createdAt}}</div>
+                <div class=""><h5 class="card-title weblogH"><a href="#" id="postTitle" class="update-link" data-weblog-id="{{id}}">{{title}}</a></h5></div>
+                <div class="weblogInfo">Posted on <span class="date">{{createdAt}}</span></div>
             </div>
             <div class="card-body text" id="contentBox">
                 <p class="card-text" id="postTexts">{{content}}</p>
@@ -12,8 +12,8 @@
 
 <div class="container my-4">
   <div class="d-flex">
-    <div class="form-container">
-        <form id="updateForm" style="display: none;">
+    <div class="form-container" id="showUpdateForm" style="display: none;">
+        <form id="updateForm">
             <div class="form-group">
                 <input id="updateTitle" class="form-control mb-2"value="{{title}}">
             </div>

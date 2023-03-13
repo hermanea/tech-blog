@@ -46,13 +46,22 @@ router.get("/dashboard", (req,res) => {
 router.get("/viewblog/:weblogId", (req,res) => {
   const { weblogId } = req.params;
   Weblog.findByPk(weblogId, {
-      include:[User, Comment]
+      include:[
+        {
+          model: User,
+          attributes: ['id', 'username']
+        },
+        {
+          model: Comment,
+          include: [User]
+        },
+      ],
   })
   .then(weblogCommentData=>{
       console.log(weblogCommentData)
       console.log(weblogCommentData.toJSON());
       res.render('viewblog', {
-        Comment: weblogCommentData.toJSON(),
+        weblogCommentData: weblogCommentData.toJSON(),
       })
     }).catch(err=>{
       console.group(err);

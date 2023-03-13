@@ -1,12 +1,24 @@
->
-{{#each weblog.Comments}}
-    <div class="card border">
-        <div class="card-body text">
-            <p class="card-text" id="postTexts">{{this.content}}</p>
-        </div>
-        <div class="">
-            <div class="">Posted by: {{this.User.username}} on {{this.createdAt}}</div>
-        </div>
-    </div>
-{{/each}}
 
+<div class="card custom-card">
+    <div class="card-body">
+        <div class=""><h5 class="card-title"><a href="#" id="weblogTitle" class="comment-link" data-weblog-id="{{id}}">{{weblogCommentData.title}}</a></h5></div>
+        <div class="">Posted by: <span class="username">{{weblogCommentData.User.username}}</span> on <span class="date">{{weblogCommentData.createdAt}}</span></div>
+    </div>
+    <div class="card-body text" id="contentBox">
+        <p class="card-text" id="postTexts">{{weblogCommentData.content}}</p>
+    </div>
+</div>
+
+<div id="comment-Container">
+    <h4>Comments:</h2>
+    {{#each weblogCommentData.Comments}}
+            <div class="card custom-card">
+                <div class="card-body text">
+                    <p class="card-text" id="postTexts">{{content}}</p>
+                </div>
+                <div class="commentInfo">
+                    <div class="">Posted by: <span class="username">{{User.username}}</span> on <span class="date">{{createdAt}}</span></div>
+                </div>
+            </div>
+    {{/each}}
+</div>

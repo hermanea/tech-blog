@@ -7,6 +7,8 @@ router.get("/", (req,res)=>{
       include:[
         {
           model: User,
+        },
+        {
           model: Weblog
         }
       ]
@@ -22,8 +24,11 @@ router.get("/", (req,res)=>{
    
 router.get("/:id", (req,res)=>{
     Comment.findByPk(req.params.id,{
-        include:[{
-          moder: User,}]
+        include:[
+          {
+          model: User
+          }
+        ]
     }).then(commentData=>{
         res.json(commentData)
     }).catch(err=>{
@@ -36,7 +41,15 @@ router.post("/", (req,res)=>{
     Comment.create({
         content: req.body.content,
         UserId: req.session.userId,
-        WeblogId: parseInt(req.body.weblogId)
+        WeblogId: parseInt(req.body.weblogId),
+        include: [
+          {
+            model: User,
+          },
+          {
+            model: WeblogUser,
+          },
+        ]
     })
     .then(commentData=>{
         console.log(req.body);
@@ -102,12 +115,12 @@ router.delete("/:id", (req, res) => {
 
 router.get("/post/:id", (req,res)=>{
   Weblog.findByPk(req.params.id,{
-     include:[{
-        model:Comment,
-        include:{
-            model:User
-        }
-    }]
+     include:[
+      {
+        model: Comment,
+        include: [User]
+      }
+    ]
   }).then(commentData=>{
      res.json(commentData)
   }).catch(err=>{
