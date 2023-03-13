@@ -32,7 +32,7 @@ const hbs = exphbs.create({});
 app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
 
-app.use(allRoutes);
+app.use("/", allRoutes);
 
 app.get("/sessions", (req, res) => {
     res.json(req.session);
